@@ -3,7 +3,7 @@
 2. Запустить Docker
 3. Склонировать проект `git clone https://github.com/MilkoEvgen/data_manager.git`
 4. Открыть проект в Intellij Idea, выполнить `mvn clean install`, после этого `docker-compose up -d`
-5. Склонировать проект `git clone https://github.com/MilkoEvgen/individuals_api.git`
+5. Склонировать проект `git clone https://github.com/MilkoEvgen/individual.git`
 6. Добавить настройки из файла resources/settings-for-maven.txt в файл settings.xml (находится в папке m2), в раздел settings
 7. Открыть проект в Intellij Idea, выполнить `mvn clean install`, после этого `docker-compose up -d`
 ---
