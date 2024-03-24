@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+  individuals_api:
+    container_name: individuals_api
+    env_file:
+      - vars.env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8087"
+    networks:
+      - my-docker-network
+
+networks:
+  my-docker-network:
+    external: true

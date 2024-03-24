@@ -1,0 +1,28 @@
+<settings>
+  <servers>
+    <server>
+      <id>maven-public</id>
+      <username>read_all_user</username>
+      <password>asd123</password>
+    </server>
+    <server>
+      <id>payment_provider_repo</id>
+      <username>read_all_user</username>
+      <password>asd123</password>
+    </server>
+  </servers>
+  <mirrors>
+    <mirror>
+      <id>maven-public</id>
+      <mirrorOf>maven-public</mirrorOf>
+      <url>http://82.97.247.194:8081/repository/maven-public/</url>
+      <blocked>false</blocked>
+    </mirror>
+    <mirror>
+      <id>payment_provider_repo</id>
+      <mirrorOf>payment_provider_repo</mirrorOf>
+      <url>http://82.97.247.194:8081/repository/payment_provider_repo/</url>
+      <blocked>false</blocked>
+    </mirror>
+  </mirrors>
+</settings>
