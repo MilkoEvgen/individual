@@ -165,35 +165,50 @@ public class AuthRestControllerV1Test {
                 .expectStatus().isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-//    @Test
-//    @Order(5)
-//    public void refreshTokenShouldReturnNewToken() throws JsonProcessingException {
-//        authRequestDto.setLogin("login");
-//        EntityExchangeResult<AuthResponseDto> exchangeResult = webTestClient.post().uri("/api/v1/auth/login")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .bodyValue(authRequestDto)
-//                .exchange()
-//                .expectStatus().isOk()
-//                .expectBody(AuthResponseDto.class)
-//                .returnResult();
-//
-//        String refreshToken = Objects.requireNonNull(exchangeResult.getResponseBody()).getRefreshToken();
-//
-//        RefreshTokenRequest refreshTokenRequest = RefreshTokenRequest.builder()
-//                .refreshToken(refreshToken)
-//                .build();
-//
-//        webTestClient.post().uri("/api/v1/auth/refresh_token")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .bodyValue(refreshTokenRequest)
-//                .exchange()
-//                .expectStatus().isOk()
-//                .expectBody()
-//                .jsonPath("$.access_token").exists()
-//                .jsonPath("$.expires_in").exists()
-//                .jsonPath("$.refresh_expires_in").exists()
-//                .jsonPath("$.refresh_token").exists()
-//                .jsonPath("$.token_type").isEqualTo("Bearer");
-//    }
+    @Test
+    @Order(5)
+    public void refreshTokenShouldReturnNewToken() throws JsonProcessingException {
+        authRequestDto.setLogin("login");
+        EntityExchangeResult<AuthResponseDto> exchangeResult = webTestClient.post().uri("/api/v1/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(authRequestDto)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(AuthResponseDto.class)
+                .returnResult();
+
+        String refreshToken = Objects.requireNonNull(exchangeResult.getResponseBody()).getRefreshToken();
+
+        RefreshTokenRequest refreshTokenRequest = RefreshTokenRequest.builder()
+                .refreshToken(refreshToken)
+                .build();
+
+        webTestClient.post().uri("/api/v1/auth/refresh_token")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(refreshTokenRequest)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.access_token").exists()
+                .jsonPath("$.expires_in").exists()
+                .jsonPath("$.refresh_expires_in").exists()
+                .jsonPath("$.refresh_token").exists()
+                .jsonPath("$.token_type").isEqualTo("Bearer");
+    }
+
+    @Test
+    @Order(6)
+    public void refreshTokenWithInvalidTokenShouldReturnError() {
+        RefreshTokenRequest invalidRefreshTokenRequest = RefreshTokenRequest.builder()
+                .refreshToken("невалидный_токен")
+                .build();
+
+        webTestClient.post().uri("/api/v1/auth/refresh_token")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(invalidRefreshTokenRequest)
+                .exchange()
+                .expectStatus().isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
 }

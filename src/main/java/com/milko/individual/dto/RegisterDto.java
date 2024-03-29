@@ -1,11 +1,15 @@
 package com.milko.individual.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RegisterDto {
     private String login;
     private String password;
